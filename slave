@@ -1,0 +1,70 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date:    11:41:27 12/27/2013 
+// Design Name: 
+// Module Name:    slaveclocksipo 
+// Project Name: 
+// Target Devices: 
+// Tool versions: 
+// Description: 
+//
+// Dependencies: 
+//
+// Revision: 
+// Revision 0.01 - File Created
+// Additional Comments: 
+//
+//////////////////////////////////////////////////////////////////////////////////
+module slaveclocksipo(s_ss_bar,s_sclk,MOSI_1,reset,cs,address,MISO,clock,read,opb_dataout);
+input MOSI_1,reset,clock,read,cs,s_sclk;
+input [15:0] address;
+output [0:7] MISO;
+input s_ss_bar; 
+output [31:0]opb_dataout;
+reg[31:0]opb_dataout;
+reg [0:7] MISO;
+reg [7:0] temp;
+always @(posedge clock or  posedge reset)
+
+begin
+if(reset==1)
+  begin
+   opb_dataout<=32'h00000000;
+  end
+ else if (read==1'b1 && cs==1'b1)
+  begin
+  if(address==16'b0000000000001111 && cs==1)
+   opb_dataout<=MISO;
+ end
+end  
+always @(posedge s_sclk)
+begin
+ if(reset==1)
+  begin
+  MISO<=8'b0;
+  end
+  else if(s_ss_bar==0)
+  begin
+  temp[7]<=MOSI_1;
+  temp[6]<=temp[7];
+  temp[5]<=temp[6];
+  temp[4]<=temp[5];
+  temp[3]<=temp[4];
+  temp[2]<=temp[3];
+  temp[1]<=temp[2];
+  temp[0]<=temp[1];
+  end
+  MISO<=temp;
+  end
+//always @(posedge clk or posedge reset or read or cs)
+//begin
+// if(read==1 and cs==1)
+  //begin
+   //if (address==16'b0000000000001111)
+    //opb_dataout<=MISO;
+  //end
+//end
+endmodule
