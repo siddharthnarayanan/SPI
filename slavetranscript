@@ -1,0 +1,64 @@
+do {top.fdo} 
+# ** Warning: (vlib-34) Library already exists at "work".
+# QuestaSim vlog 6.2b Compiler 2006.07 Jul 31 2006
+# -- Compiling module slaveclocksipo
+# 
+# Top level modules:
+# 	slaveclocksipo
+# QuestaSim vlog 6.2b Compiler 2006.07 Jul 31 2006
+# -- Compiling module slavebusint
+# 
+# Top level modules:
+# 	slavebusint
+# QuestaSim vlog 6.2b Compiler 2006.07 Jul 31 2006
+# -- Compiling module serialclockdvdr
+# 
+# Top level modules:
+# 	serialclockdvdr
+# QuestaSim vlog 6.2b Compiler 2006.07 Jul 31 2006
+# -- Compiling module top
+# 
+# Top level modules:
+# 	top
+# QuestaSim vlog 6.2b Compiler 2006.07 Jul 31 2006
+# -- Compiling module glbl
+# 
+# Top level modules:
+# 	glbl
+# vsim -L xilinxcorelib_ver -L unisims_ver -L unimacro_ver -L secureip -lib work -t 1ps top glbl 
+# Loading work.top(fast)
+# Loading work.serialclockdvdr(fast)
+# Loading work.slaveclocksipo(fast)
+# Loading work.slavebusint(fast)
+# Loading work.glbl(fast)
+# ** Warning: (vsim-WLF-5000) Log file vsim.wlf currently in use.
+# File in use by: RCI  Hostname: RCI-B0976629FBA  ProcessID: 3960
+#           Attempting to use alternate file "./wlft2cj0d4".
+# ** Warning: (vsim-WLF-5001) Could not open log file vsim.wlf.  Using ./wlft2cj0d4 instead.
+# ** Warning: (vsim-WLF-5001) Could not open log file vsim.wlf.  Using ./wlft2cj0d4 instead.
+# C:/Documents and Settings/RCI/Desktop/spi/top.v(91): [TFMPC] - Too few port connections. Expected 16, found 15.
+#         Region: /top/m3
+# ** Warning: (vsim-3722) C:/Documents and Settings/RCI/Desktop/spi/top.v(91): [TFMPC] - Missing connection for port 'clk'.
+# .main_pane.mdi.interior.cs.vm.paneset.cli_0.wf.clip.cs.pw.wf
+# .main_pane.workspace.interior.cs.nb.canvas.notebook.cs.page2.cs
+# .main_pane.signals.interior.cs
+add wave -r /*
+force -freeze sim:/top/opb_clk 1 0, 0 {10000 ps} -r 20ns
+force -freeze sim:/top/reset 1 0
+run 1000ns
+force -freeze sim:/top/reset 0 0
+force -freeze sim:/top/s_ss_bar 1 0
+run 1000ns
+force -freeze sim:/top/s_sclk 1 0, 0 {10000 ps} -r 20ns
+run 1000ns
+force -freeze sim:/top/s_ss_bar 0 0
+force -freeze sim:/top/MOSI_1 1 0
+run 40ns
+force -freeze sim:/top/MOSI_1 0 0
+run 60ns
+force -freeze sim:/top/MOSI_1 1 0
+run 20ns
+force -freeze sim:/top/MOSI_1 0 0
+run 40ns
+force -freeze sim:/top/s_ss_bar 1 0
+run 1000ns
